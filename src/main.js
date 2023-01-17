@@ -5,19 +5,22 @@ import './style.css';
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
 const getSection = document.querySelector('.products');
-const getSection2 = document.querySelector('.container');
-const deleteP = document.querySelector('.loading');
+const catchSection = document.querySelector('.container');
 
+// Função que cria o texto "Carregando" enquanto a promise está gerando a requisição
 const createLoading = () => {
-  const createP = document.createElement('p');
-  createP.className = 'loading';
-  createP.innerText = 'carregando...';
-  getSection2.appendChild(createP);
-  return createP;
+  const createSection = document.createElement('section');
+  createSection.className = 'loading';
+  createSection.innerText = 'carregando...';
+  catchSection.appendChild(createSection);
+  return createSection;
 };
 
+// Função que exlcui o texto carregando, quando a promise está realizada
 const deleteLoading = () => {
-  getSection2.removeChild(deleteP);
+  const catchLoading = document.querySelector('.loading');
+  const removeSection = catchSection.removeChild(catchLoading);
+  return removeSection;
 };
 
 window.onload = () => {
