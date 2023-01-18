@@ -1,4 +1,4 @@
-import { saveCartID } from './helpers/cartFunctions';
+import { saveCartID, getSavedCartIDs } from './helpers/cartFunctions';
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
@@ -7,6 +7,7 @@ import './style.css';
 document.querySelector('.cep-button').addEventListener('click', searchCep);
 const getSection = document.querySelector('.products');
 const catchSection = document.querySelector('.container');
+const shopCar = document.querySelector('.cart__products');
 
 // Função que cria o texto "Carregando" enquanto a promise está gerando a requisição
 const createLoading = () => {
@@ -55,7 +56,19 @@ getproductHtml.addEventListener('click', async (event) => {
     saveCartID(textId);
 
     const selectProducts = await fetchProduct(textId);
-    const shopCar = document.querySelector('.cart__products');
     shopCar.appendChild(createCartProductElement(selectProducts));
   }
 });
+
+const captureLocalStorage = async () => {
+  const catchLocal = getSavedCartIDs();
+  const getLocalStorage = catchLocal.map(async (element) => {
+    const selectProducts = await fetchProduct(element);
+    return selectProducts;
+  });
+  const arrayPromises = await Promise.all(getLocalStorage);
+  arrayPromises.forEach((element) => {
+    shopCar.appendChild(createCartProductElement(element));
+  });
+};
+captureLocalStorage();
