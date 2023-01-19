@@ -45,30 +45,58 @@ const getProducts = async () => {
   }
   deleteLoading();
 };
-getProducts();
 
+// Recuperando do localStorage
+const productsLocalStorage = () => getSavedCartIDs();
+
+// soma os valores do carrinho
+const totalPrice = () => {
+  const totalPriceCart = document.querySelector('.total-price');
+  const products = productsLocalStorage();
+  let total = 0;
+
+  products.forEach(({ price }) => {
+    total += parseFloat(price);
+  });
+
+  totalPriceCart.innerText = total.toFixed(2);
+};
+
+// subtrai os valores do carrinho
+const ul = document.querySelector('.cart__products');
+ul.addEventListener('click', totalPrice);
+
+// adicionando no carrinho
 const getproductHtml = document.querySelector('.products');
 getproductHtml.addEventListener('click', async (event) => {
   if (event.target.className === 'product__add') {
     const parentNodeTarget = event.target.parentNode;
     const getId = parentNodeTarget.firstElementChild;
     const textId = getId.innerText;
-    saveCartID(textId);
 
     const selectProducts = await fetchProduct(textId);
+    saveCartID(selectProducts);
+
     shopCar.appendChild(createCartProductElement(selectProducts));
+    totalPrice();
   }
 });
 
-const captureLocalStorage = async () => {
-  const catchLocal = getSavedCartIDs();
-  const getLocalStorage = catchLocal.map(async (element) => {
-    const selectProducts = await fetchProduct(element);
-    return selectProducts;
+// Alimenta o carrinho com os produtos do localStorage
+const captureLocalStorage = () => {
+  const products = productsLocalStorage();
+
+  if (!products) return false;
+
+  products.forEach((product) => {
+    shopCar.appendChild(createCartProductElement(product));
   });
-  const arrayPromises = await Promise.all(getLocalStorage);
-  arrayPromises.forEach((element) => {
-    shopCar.appendChild(createCartProductElement(element));
-  });
+
+  totalPrice();
 };
-captureLocalStorage();
+
+// Iniciando a aplicação
+window.onload = async () => {
+  captureLocalStorage();
+  await getProducts();
+};
