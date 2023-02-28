@@ -22,7 +22,9 @@ This was a project carried out jointly with Trybe, a developer professionalizing
 
 ##### Improvements:
 
-In this application, it is possible to continue development by applying new pages to finalize the purchase process, deliver new elements with better user experience, consume other APIs. The focus of the application was the consumption of APIs and the display of data on the screen. Little was looked into the CSS itself.
+In this application, it is possible to continue development by applying new pages to finalize the purchase process, deliver new elements with better user experience, consume other APIs. 
+
+> The focus of the application was the consumption of APIs and the display of data on the screen. Little was looked into the CSS itself.
 
 ## 🛜 Installing the repository on your machine
 
