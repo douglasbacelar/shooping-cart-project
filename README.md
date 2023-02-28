@@ -6,7 +6,7 @@
 
 This was a project carried out jointly with Trybe, a developer professionalizing company. With the design offered by them, I developed functions and tests that simulate the steps of an online purchase. A "Mercado Livre" API was used to fetch product data and a CEP API to get an address.
 
-> Deploy:
+> Deploy: https://shooping-cart-project.vercel.app/
 
 ## 🌐 Overview:
 
