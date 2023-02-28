@@ -32,6 +32,11 @@ In this application, it is possible to continue development by applying new page
 git clone git@github.com:douglasbacelar/shooping-cart-project.git
 npm install
 ```
+## 🧪 Running the coverage tests
+
+```js
+npm run test-coverage
+```
 
 ## 🔧 Tools and Methodologies Used
 
